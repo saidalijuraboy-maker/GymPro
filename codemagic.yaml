@@ -7,12 +7,13 @@ workflows:
     scripts:
       - name: Build APK
         script: |
-          flutter create --org com.gymapp \
-            --project-name workout_app /tmp/app
-          cp lib/main.dart /tmp/app/lib/main.dart
-          cp pubspec.yaml /tmp/app/pubspec.yaml
-          cd /tmp/app
+          flutter create --org com.gymapp --project-name workout_app /tmp/app
+          cp /tmp/app/android /Users/builder/clone/android -r
+          cp /tmp/app/test /Users/builder/clone/test -r
+          cp /tmp/app/linux /Users/builder/clone/linux -r || true
+          cp /tmp/app/windows /Users/builder/clone/windows -r || true
+          cp /tmp/app/web /Users/builder/clone/web -r || true
           flutter pub get
           flutter build apk --debug
     artifacts:
-      - /tmp/app/build/app/outputs/flutter-apk/app-debug.apk
+      - build/app/outputs/flutter-apk/app-debug.apk
