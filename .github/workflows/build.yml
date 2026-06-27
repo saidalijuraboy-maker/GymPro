@@ -13,8 +13,10 @@ jobs:
         with:
           flutter-version: '3.24.0'
       - run: flutter create --org com.gymapp --project-name workout_app .
-      - run: flutter pub get
-      - run: flutter build apk --debug
+      - run: |
+          sed -i 's/ext.kotlin_version = .*/ext.kotlin_version = "1.9.0"/' android/build.gradle
+          flutter pub get
+          flutter build apk --debug
       - uses: actions/upload-artifact@v4
         with:
           name: app-debug
