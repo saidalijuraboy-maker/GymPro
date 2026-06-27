@@ -5,16 +5,18 @@ workflows:
     environment:
       flutter: stable
     scripts:
-      - name: Create Flutter project
+      - name: Setup Flutter project
         script: |
-          flutter create .
-          cp lib/main.dart lib/main.dart.bak
-          flutter create .
-          cp lib/main.dart.bak lib/main.dart
-      - name: Get dependencies
-        script: flutter pub get
+          cp lib/main.dart /tmp/main.dart
+          cp pubspec.yaml /tmp/pubspec.yaml
+          flutter create --org com.gymapp --project-name workout_app .
+          cp /tmp/main.dart lib/main.dart
+          cp /tmp/pubspec.yaml pubspec.yaml
+          flutter pub get
       - name: Build iOS
         script: |
           flutter build ios --release --no-codesign
     artifacts:
       - build/ios/iphoneos/Runner.app
+
+
