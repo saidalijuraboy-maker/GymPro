@@ -5,7 +5,7 @@ workflows:
     environment:
       flutter: stable
     scripts:
-      - name: Setup project
+      - name: Build APK
         script: |
           flutter create --org com.gymapp \
             --project-name workout_app /tmp/app
@@ -13,6 +13,6 @@ workflows:
           cp pubspec.yaml /tmp/app/pubspec.yaml
           cd /tmp/app
           flutter pub get
-          flutter build apk --release
+          flutter build apk --debug
     artifacts:
-      - /tmp/app/build/app/outputs/flutter-apk/app-release.apk
+      - /tmp/app/build/app/outputs/flutter-apk/app-debug.apk
